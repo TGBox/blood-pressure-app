@@ -32,42 +32,46 @@ export default function InputForm({ addDataSet }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     addDataSet(values);
-    setValues(initialValues);
+    resetForm();
+  };
+
+  const resetForm = () => {
+    document.getElementById("form").reset();
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form id="form" onSubmit={handleSubmit}>
       <div id="inputs">
         <div className="formRowItem">
-          <label className="label" for="dateIn">Datum:</label><br/>
+          <label className="label" htmlFor="dateIn">Datum:</label><br/>
           <input name="date" id="dateIn" type="date" min="2022-04-27" max="2024-04-27" onChange={handleInputChange} required></input>
         </div>
         <div className="formRowItem">
-          <label className="label" for="timeIn">Uhrzeit:</label><br/>
+          <label className="label" htmlFor="timeIn">Uhrzeit:</label><br/>
           <input name="time" id="timeIn" type="time" onChange={handleInputChange} required></input>
         </div>
         <div className="formRowItem">
-          <label className="label" for="sysIn">Systolisch:</label><br/>
+          <label className="label" htmlFor="sysIn">Systolisch:</label><br/>
           <input name="sys" id="sysIn" className="nr" type="number" min="50" max="300" onChange={handleInputChange} required></input>
         </div>
         <div className="formRowItem">
-          <label className="label" for="diaIn">Diastolisch:</label><br/>
+          <label className="label" htmlFor="diaIn">Diastolisch:</label><br/>
           <input name="dia" id="diaIn" className="nr" type="number" min="50" max="200" onChange={handleInputChange} required></input>
         </div>
         <div className="formRowItem">
-          <label className="label" for="pulsIn">Puls:</label><br/>
+          <label className="label" htmlFor="pulsIn">Puls:</label><br/>
           <input name="puls" id="pulsIn" className="nr" type="number" min="50" max="200" onChange={handleInputChange} required></input>
         </div>
         <div className="formRowItem">
-          <label className="label" for="mediIn">Medikinet:</label><br/>
-          <input name="medi" id="mediIn" className="nr" type="number" min="0" max="100" onChange={handleInputChange} value="0" required></input>
+          <label className="label" htmlFor="mediIn">Medikinet:</label><br/>
+          <input name="medi" id="mediIn" className="nr" type="number" min="0" max="100" onChange={handleInputChange}required></input>
         </div>
         <div className="formRowItem">
-          <label className="label" for="energyIn">Energydrinks:</label><br/>
-          <input name="energy" id="energyIn" className="nr" type="number" min="0" max="7" onChange={handleInputChange} value="0" required></input>
+          <label className="label" htmlFor="energyIn">Energydrinks:</label><br/>
+          <input name="energy" id="energyIn" className="nr" type="number" min="0" max="7" onChange={handleInputChange}required></input>
         </div>
         <div className="formRowItem">
-          <label className="label" for="commentIn">Kommentar:</label><br/>
+          <label className="label" htmlFor="commentIn">Kommentar:</label><br/>
           <input name="comment" id="commentIn" type="text" placeholder="Zusatzbemerkungen?" onChange={handleInputChange}></input>
         </div>
       </div>

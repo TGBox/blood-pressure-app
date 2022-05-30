@@ -1,8 +1,14 @@
 import { useState } from 'react';
 import './App.css';
 import InputForm from './components/InputForm';
+import { DataSetRow } from './components/DataSetRow';
 
 function App() {
+
+  // TODO: CSS styling needs to be prettier.
+  // TODO: Saving and loading data from the local storage needs to be added.
+  // TODO: Input validation needs to be better.
+  // TODO: Data exporting as a human readable list needs to be added.
 
   // DataList that will keep all the single data sets to show them inside of the app.
   const [dataList, setDataList] = useState([]);
@@ -41,7 +47,20 @@ function App() {
 				</div>
         <div id="dataListDiv">
           {dataList.map((item, index) => {
-            // TODO: Think of an appropriate way to map the single values onto correctly sized divs to match the headings.
+            return (
+              <DataSetRow
+                date={item.date}
+                time={item.time}
+                sys={item.sys}
+                dia={item.dia}
+                puls={item.puls}
+                medi={item.medi}
+                energy={item.energy}
+                comment={item.comment}
+                uid={index.toString()}
+                key={index}
+              ></DataSetRow>
+            );
           })}
         </div>
         <div id="formDiv">
