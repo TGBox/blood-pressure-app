@@ -11,7 +11,6 @@ function App() {
     If no data is available, we initialize an empty array.
   */
   const [dataList, setDataList] = useState(() => {
-    console.log(localStorage.getItem("bloodPressureData"));
     const data = localStorage.getItem("bloodPressureData");
     const parsedData = JSON.parse(data);
     return parsedData || [];
@@ -74,7 +73,8 @@ function App() {
 
   // Deletes possibly saved data from the local storage and refreshes the page to update the list that is displayed.
   const deleteData = () => {
-    if(window.confirm("Wollen Sie wirklich den kompletten Datensatz löschen?\nDiese Aktion kann nicht rückgängig gemacht werden.\n\nVorheriges Speichern wird empfohlen.")){
+    if(window.confirm("Wollen Sie wirklich den kompletten Datensatz löschen?\nDiese Aktion kann nicht rückgängig" + 
+      " gemacht werden.\n\nVorheriges Speichern wird empfohlen.")){
       localStorage.removeItem("bloodPressureData");
       window.location.reload();
     }
