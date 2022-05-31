@@ -5,8 +5,6 @@ import { DataSetRow } from './components/DataSetRow';
 
 function App() {
 
-  // TODO: Input validation needs to be more verbose as to handle missing inputs or wrong valued inputs.
-
   /* 
     DataList useState that will keep all the single data sets to show them inside of the app. 
     Checks if data is available in the local storage of the browser and parses that to initialize the useState.

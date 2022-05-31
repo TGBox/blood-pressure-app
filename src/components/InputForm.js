@@ -36,8 +36,11 @@ export default function InputForm({ addDataSet }) {
   // Simple submit handler to prevent page refresh, collect all relative data and reset the values for the inputs.
   const handleSubmit = (e) => {
     e.preventDefault();
-    addDataSet(values);
-    resetForm();
+    if(values.date !== "" && values.time !== "" && values.sys !== "" && values.dia !== "" && 
+      values.puls !== "" && values.medi !== "" && values.energy !== ""){
+        addDataSet(values);
+        resetForm();
+    }
   };
 
   // Resets the form input fields.
@@ -69,15 +72,15 @@ export default function InputForm({ addDataSet }) {
           <input name="puls" id="pulsIn" className="nr" type="number" min="50" max="200" onChange={handleInputChange} required></input>
         </div>
         <div className="formRowItem">
-          <label className="label" htmlFor="mediIn">Medikinet:</label><br/>
-          <input name="medi" id="mediIn" className="nr" type="number" min="0" max="100" onChange={handleInputChange}required></input>
+          <label className="label" htmlFor="mediIn">Medikinet in mg:</label><br/>
+          <input name="medi" id="mediIn" className="nr" type="number" min="0" max="100" step="10"onChange={handleInputChange} required></input>
         </div>
         <div className="formRowItem">
           <label className="label" htmlFor="energyIn">Energydrinks:</label><br/>
-          <input name="energy" id="energyIn" className="nr" type="number" min="0" max="7" onChange={handleInputChange}required></input>
+          <input name="energy" id="energyIn" className="nr" type="number" min="0" max="7" onChange={handleInputChange} required></input>
         </div>
         <div className="formRowItem">
-          <label className="label" htmlFor="commentIn">Kommentar:</label><br/>
+          <label className="label" htmlFor="commentIn">Optionaler Kommentar:</label><br/>
           <input name="comment" id="commentIn" type="text" placeholder="Zusatzbemerkungen?" onChange={handleInputChange}></input>
         </div>
       </div>
