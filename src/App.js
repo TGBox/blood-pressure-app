@@ -5,7 +5,6 @@ import { DataSetRow } from './components/DataSetRow';
 
 function App() {
 
-  // TODO: CSS styling needs to be prettier.
   // TODO: Input validation needs to be more verbose as to handle missing inputs or wrong valued inputs.
   // TODO: Prevent accidental clicking of the delete data button via user prompt.
 
@@ -82,11 +81,13 @@ function App() {
   return (
     <div className="App">
       <header id='head'>
-				<h1>Danis Blutdruck Protokollierer</h1>
+        <div id="headline">
+				  <h1>Danis Blutdruck Protokollierer</h1>
+        </div>
         <br/>
         <div id="downloadDiv">
           <button id="createFileLink" onClick={generateFileToDownload}>Datensatz zum Download vorbereiten</button>
-          <a download="BlutdruckProtokoll.txt" id="downloadLink">Download starten</a>
+          <a download="BlutdruckProtokoll.txt" id="downloadLink" href="none">Download starten</a>
         </div>
         <br/>
         <div>
@@ -101,7 +102,7 @@ function App() {
 					<h5 className='heading'>Diastolisch</h5>
 					<h5 className='heading'>Puls</h5>
 					<h5 className='heading'>Medikinet in mg</h5>
-					<h5 className='heading'>Energydrinks</h5>
+					<h5 className='heading'>Energydrinks Stückzahl</h5>
 					<h5 className='heading'>Kommentar</h5>
 				</div>
         <div id="dataListDiv">

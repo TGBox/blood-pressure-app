@@ -46,7 +46,7 @@ export default function InputForm({ addDataSet }) {
   };
 
   return (
-    <form id="form" onSubmit={handleSubmit}>
+    <form id="form">
       <div id="inputs">
         <div className="formRowItem">
           <label className="label" htmlFor="dateIn">Datum:</label><br/>
@@ -82,7 +82,7 @@ export default function InputForm({ addDataSet }) {
         </div>
       </div>
       <div id="submitDiv">
-        <input name="submit" type="submit" value="Werte hinzufügen"></input>
+        <button name="submit" id="submit" onClick={handleSubmit}>Werte hinzufügen</button>
       </div>
     </form>
   );

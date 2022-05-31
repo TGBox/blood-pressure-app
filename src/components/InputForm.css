@@ -1,10 +1,12 @@
 #inputs {
-	background-color: blue;
+	background-color: rgb(95, 69, 174);
 	margin: 1rem;
-	padding: 1rem;
+	padding: 2rem;
 	display: grid;
   grid-auto-flow: column;
 	grid-auto-columns: 12%;
+  border: none;
+	border-radius: 2.5rem;
 }
 
 .gridRowItem {
@@ -15,4 +17,23 @@
 .label {
 	color: white;
 	font-weight: bold;
+}
+
+#submit {
+	background-color: rgb(35, 80, 35);
+	color: aliceblue;
+	font-size: large;
+	font-weight: bold;
+	border: none;
+	border-radius: 10px;
+	padding: 0.5rem;
+}
+
+input {
+	margin: 0.5rem;
+	font-weight: bold;
+}
+
+::placeholder {
+	font-weight: 400;
 }
