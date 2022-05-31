@@ -7,6 +7,7 @@ function App() {
 
   // TODO: CSS styling needs to be prettier.
   // TODO: Input validation needs to be more verbose as to handle missing inputs or wrong valued inputs.
+  // TODO: Prevent accidental clicking of the delete data button via user prompt.
 
   /* 
     DataList useState that will keep all the single data sets to show them inside of the app. 
