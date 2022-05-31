@@ -6,7 +6,6 @@ import { DataSetRow } from './components/DataSetRow';
 function App() {
 
   // TODO: Input validation needs to be more verbose as to handle missing inputs or wrong valued inputs.
-  // TODO: Prevent accidental clicking of the delete data button via user prompt.
 
   /* 
     DataList useState that will keep all the single data sets to show them inside of the app. 
@@ -45,6 +44,9 @@ function App() {
     setDataList(newDataList);
     // This will save the data to the local storage of the browser, every time we add another data set.
     localStorage.setItem("bloodPressureData", JSON.stringify(dataList));
+    // And when new data is added, we hide the download link afterwards, so the user has to manually request it again.
+    let link = document.getElementById("downloadLink");
+    link.style = "display: none";
   };
 
   /*
@@ -74,8 +76,10 @@ function App() {
 
   // Deletes possibly saved data from the local storage and refreshes the page to update the list that is displayed.
   const deleteData = () => {
-    localStorage.removeItem("bloodPressureData");
-    window.location.reload();
+    if(window.confirm("Wollen Sie wirklich den kompletten Datensatz löschen?\nDiese Aktion kann nicht rückgängig gemacht werden.\n\nVorheriges Speichern wird empfohlen.")){
+      localStorage.removeItem("bloodPressureData");
+      window.location.reload();
+    }
   };
 
   return (
