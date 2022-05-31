@@ -3,6 +3,7 @@ import "./InputForm.css";
 
 // Initial values for the different input fields of the form.
 const initialValues = {
+  uid: 1,
   date: "",
   time: "",
   sys: "",
@@ -12,7 +13,11 @@ const initialValues = {
   energy: "",
   comment: "",
 };
-
+/*
+  InputForm that will handle the different inputs.
+  - currentCount: Int that indicates the current uid of the last dataSet in the dataList array of the app. Starting at 1.
+  - addDataSet: Ref to the function inside the app to add the current new data set, that is generated from the inputs. 
+*/
 export default function InputForm({ addDataSet }) {
 
   // UseState to set the initial values within the form.
@@ -35,6 +40,7 @@ export default function InputForm({ addDataSet }) {
     resetForm();
   };
 
+  // Resets the form input fields.
   const resetForm = () => {
     document.getElementById("form").reset();
   };

@@ -6,33 +6,91 @@ import { DataSetRow } from './components/DataSetRow';
 function App() {
 
   // TODO: CSS styling needs to be prettier.
-  // TODO: Saving and loading data from the local storage needs to be added.
-  // TODO: Input validation needs to be better.
-  // TODO: Data exporting as a human readable list needs to be added.
+  // TODO: Input validation needs to be more verbose as to handle missing inputs or wrong valued inputs.
 
-  // DataList that will keep all the single data sets to show them inside of the app.
-  const [dataList, setDataList] = useState([]);
+  /* 
+    DataList useState that will keep all the single data sets to show them inside of the app. 
+    Checks if data is available in the local storage of the browser and parses that to initialize the useState.
+    If no data is available, we initialize an empty array.
+  */
+  const [dataList, setDataList] = useState(() => {
+    console.log(localStorage.getItem("bloodPressureData"));
+    const data = localStorage.getItem("bloodPressureData");
+    const parsedData = JSON.parse(data);
+    return parsedData || [];
+  });
+
+  /* 
+    Init of the useState for the counter variable that will keep track of the amount of items that we have stored in our list.
+    Will check for the length of the dataList array and sets the counter accordingly so that we start counting at 1.
+  */
+  const [dataCounter, setCounter] = useState(dataList.length + 1);
 
   // Handles the collected values from the input form to add them to the list of data that is currently present.
-  const addDataSet = (inputValues) => {
+  const addDataSet = (input) => {
+    // Updating the counter for each new entry to our list.
+    setCounter(dataCounter + 1);
     let newDataList = [...dataList];
     newDataList = [...newDataList, {
-      date: inputValues.date, 
-      time: inputValues.time, 
-      sys: inputValues.sys, 
-      dia: inputValues.dia, 
-      puls: inputValues.puls,
-      medi: inputValues.medi,
-      energy: inputValues.energy,
-      comment: inputValues.comment
+      uid: dataCounter,
+      date: input.date, 
+      time: input.time, 
+      sys: input.sys, 
+      dia: input.dia, 
+      puls: input.puls,
+      medi: input.medi,
+      energy: input.energy,
+      comment: input.comment
     }];
     setDataList(newDataList);
+    // This will save the data to the local storage of the browser, every time we add another data set.
+    localStorage.setItem("bloodPressureData", JSON.stringify(dataList));
+  };
+
+  /*
+    Handles the preparation of the JSON parsed dataSet as a text file to enable downloading it.
+    Checks if data is available and notifies the user otherwise.
+  */
+  const generateFileToDownload = () => {
+    let textFile = null,
+      makeTextFile = function (text) {
+        let data = new Blob([text], {type: 'text/plain'});
+        // If an existing file gets replaced, we need to revoke the object URL to avoid memory leaks.
+        if(textFile !== null) {
+          window.URL.revokeObjectURL(textFile);
+        }
+        textFile = window.URL.createObjectURL(data);
+        return textFile;
+      };
+    if(dataList === []) {
+      alert("Es gibt keine Daten die gespeichert werden können!");
+    } else {
+      let dataAsReadableText = JSON.stringify(dataList, null, 2);
+      let link = document.getElementById("downloadLink");
+      link.href = makeTextFile(dataAsReadableText);
+      link.style.display = "block";
+    }
+  };
+
+  // Deletes possibly saved data from the local storage and refreshes the page to update the list that is displayed.
+  const deleteData = () => {
+    localStorage.removeItem("bloodPressureData");
+    window.location.reload();
   };
 
   return (
     <div className="App">
       <header id='head'>
 				<h1>Danis Blutdruck Protokollierer</h1>
+        <br/>
+        <div id="downloadDiv">
+          <button id="createFileLink" onClick={generateFileToDownload}>Datensatz zum Download vorbereiten</button>
+          <a download="BlutdruckProtokoll.txt" id="downloadLink">Download starten</a>
+        </div>
+        <br/>
+        <div>
+          <button id="deleteSavedData" onClick={deleteData}>Datensatz löschen</button>
+        </div>
 			</header>
 			<div id="body">
 				<div id="headings">
@@ -57,7 +115,7 @@ function App() {
                 medi={item.medi}
                 energy={item.energy}
                 comment={item.comment}
-                uid={index.toString()}
+                uid={index + 1}
                 key={index}
               ></DataSetRow>
             );
