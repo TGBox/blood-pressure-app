@@ -5,6 +5,14 @@ import { DataSetRow } from './components/DataSetRow';
 
 function App() {
 
+  // BUG: Latest entry that is added won't get saved to the local storage of the browser.
+  // TODO: Formatting of the date in german layout.
+  // TODO: Time needs to be displayed nicer.
+  // TODO: Separation of the single values horizontally needs to be better.
+  // TODO: JSON file to be downloaded could get formatted better.
+  // TODO: Add possibility to display daily averages and also to export and save them as well.
+  // TODO: Resizing will result in the headings being displayed outside of their allocated places. Needs to be altered to handle that.
+
   /* 
     DataList useState that will keep all the single data sets to show them inside of the app. 
     Checks if data is available in the local storage of the browser and parses that to initialize the useState.
