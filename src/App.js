@@ -5,8 +5,8 @@ import { DataSetRow } from './components/DataSetRow';
 
 function App() {
 
-  // TODO: Time needs to be displayed nicer.
-  // TODO: Separation of the single values horizontally needs to be better.
+  // TODO: Time could be displayed nicer.
+  // TODO: Separation of the single values horizontally could be better.
   // TODO: JSON file to be downloaded could get formatted better.
   // TODO: Add possibility to display daily averages and also to export and save them as well.
   // TODO: Resizing will result in the headings being displayed outside of their allocated places. Needs to be altered to handle that.
@@ -49,6 +49,8 @@ function App() {
     // And when new data is added, we hide the download link afterwards, so the user has to manually request it again.
     let link = document.getElementById("downloadLink");
     link.style = "display: none";
+    // Also we want to always see our input form. So we manually scroll down after changes have been added.
+    window.scrollTo(0, document.body.scrollHeight);
   };
 
   // Takes a number and adds a leading zero if the number is smaller than 10.
