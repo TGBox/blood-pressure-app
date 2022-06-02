@@ -131,7 +131,7 @@ function App() {
 					<h5 className='heading'>Puls</h5>
 					<h5 className='heading'>Medikinet in mg</h5>
 					<h5 className='heading'>Energydrinks Stückzahl</h5>
-					<h5 className='heading'>Kommentar</h5>
+					<h5 className='heading' id="commentHeading">Kommentar</h5>
 				</div>
         <div id="dataListDiv">
           {dataList.map((item, index) => {

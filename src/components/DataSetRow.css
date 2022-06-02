@@ -9,6 +9,7 @@
   grid-auto-flow: column;
 	grid-auto-columns: 12%;
   border-radius: 1rem;
+  row-gap: 0.1 rem;
 }
 
 .rowItem {
