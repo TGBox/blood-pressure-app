@@ -3,7 +3,6 @@ import "./InputForm.css";
 
 // Initial values for the different input fields of the form.
 const initialValues = {
-  uid: 1,
   date: "",
   time: "",
   sys: "",

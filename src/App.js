@@ -5,7 +5,6 @@ import { DataSetRow } from './components/DataSetRow';
 
 function App() {
 
-  // TODO: Formatting of the date in german layout.
   // TODO: Time needs to be displayed nicer.
   // TODO: Separation of the single values horizontally needs to be better.
   // TODO: JSON file to be downloaded could get formatted better.
@@ -31,10 +30,11 @@ function App() {
 
   // Handles the collected values from the input form to add them to the list of data that is currently present.
   const addDataSet = (input) => {
+    let tmpDateObject = new Date(input.date);
     let newDataList = [...dataList];
     newDataList = [...newDataList, {
       uid: dataCounter,
-      date: input.date, 
+      date: formatDate(tmpDateObject), 
       time: input.time, 
       sys: input.sys, 
       dia: input.dia, 
@@ -49,6 +49,20 @@ function App() {
     // And when new data is added, we hide the download link afterwards, so the user has to manually request it again.
     let link = document.getElementById("downloadLink");
     link.style = "display: none";
+  };
+
+  // Takes a number and adds a leading zero if the number is smaller than 10.
+  const padTo2Digits = (number) => {
+    return number.toString().padStart(2, '0');
+  };
+
+  // Takes a date object and formats it to german style layout. (DD.MM.YYYY)
+  const formatDate = (date) => {
+    return [
+      padTo2Digits(date.getDate()),
+      padTo2Digits(date.getMonth()),
+      date.getFullYear(),
+    ].join(".");
   };
 
   // Called on every rerender event. Will perform the side effect to correctly set the counter according to the new datalist.
@@ -109,9 +123,9 @@ function App() {
 			<div id="body">
 				<div id="headings">
 					<h5 className='heading'>Datum</h5>
-					<h5 className='heading'>Zeit</h5>
-					<h5 className='heading'>Systolisch</h5>
-					<h5 className='heading'>Diastolisch</h5>
+					<h5 className='heading'>Uhrzeit</h5>
+					<h5 className='heading'>Systolischer Blutdruck</h5>
+					<h5 className='heading'>Diastolischer Blutdruck</h5>
 					<h5 className='heading'>Puls</h5>
 					<h5 className='heading'>Medikinet in mg</h5>
 					<h5 className='heading'>Energydrinks Stückzahl</h5>
