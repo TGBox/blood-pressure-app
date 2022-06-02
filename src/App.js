@@ -1,11 +1,10 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
 import InputForm from './components/InputForm';
 import { DataSetRow } from './components/DataSetRow';
 
 function App() {
 
-  // BUG: Latest entry that is added won't get saved to the local storage of the browser.
   // TODO: Formatting of the date in german layout.
   // TODO: Time needs to be displayed nicer.
   // TODO: Separation of the single values horizontally needs to be better.
@@ -32,8 +31,6 @@ function App() {
 
   // Handles the collected values from the input form to add them to the list of data that is currently present.
   const addDataSet = (input) => {
-    // Updating the counter for each new entry to our list.
-    setCounter(dataCounter + 1);
     let newDataList = [...dataList];
     newDataList = [...newDataList, {
       uid: dataCounter,
@@ -48,11 +45,16 @@ function App() {
     }];
     setDataList(newDataList);
     // This will save the data to the local storage of the browser, every time we add another data set.
-    localStorage.setItem("bloodPressureData", JSON.stringify(dataList));
+    localStorage.setItem("bloodPressureData", JSON.stringify(newDataList));
     // And when new data is added, we hide the download link afterwards, so the user has to manually request it again.
     let link = document.getElementById("downloadLink");
     link.style = "display: none";
   };
+
+  // Called on every rerender event. Will perform the side effect to correctly set the counter according to the new datalist.
+  useEffect(() => {
+    setCounter(dataList.length + 1);
+  }, [dataList]);
 
   /*
     Handles the preparation of the JSON parsed dataSet as a text file to enable downloading it.
