@@ -2,9 +2,8 @@
 
 # Folders can be written as plain names without any "/" or similar addition. 
 node-modules
+public
 
-# File names are written with their relative extensions.
-App.test.js
 
 # Or we can specify a general rule for ignoring certain file types as seen below.
 # This will ignore all files within our app that end on ".md".
